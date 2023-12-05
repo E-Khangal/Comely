@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Санасан тоо хэд вэ?</title>
+    <style>
+      body {
+        background-color: #90c3d4;
+        font-family: "Arial", sans-serif;
+        text-align: center;
+      }
+
+      h1 {
+        color: #005792;
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      p {
+        color: #0088cc;
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        border: 2px solid #005792;
+        border-radius: 10px;
+        font-size: 20px;
+        text-align: center;
+        margin-top: 10px;
+        outline: none;
+      }
+
+      button {
+        background-color: #005792;
+        color: #fff;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #0088cc;
+      }
+
+      #hint {
+        font-size: 24px;
+        color: #003366;
+        margin-top: 30px;
+      }
+
+      .bold-hint {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Санасан тоо хэд вэ?</h1>
+    <p>1-100-н хооронд байгаа тоог таагаарай</p>
+    <input type="text" id="taasanToo" placeholder="Тоогоо энд оруулаарай" />
+    <button onclick="taasanToogShalgah()">Таах</button>
+    <p id="hint">Хинт:</p>
+
+    <script>
+      const randomToo = Math.floor(Math.random() * 100) + 1;
+      let attempt = 5;
+      const taasanToogShalgah = () => {
+        const taasanToo = parseInt(document.getElementById("taasanToo").value);
+        const hintUguh = document.getElementById("hint");
+
+        if (isNaN(taasanToo)) {
+          hintUguh.textContent = "Тоогоо оруул";
+        } else if (taasanToo < 1 || taasanToo > 100) {
+          hintUguh.textContent = "Тоо 1-100-н хооронд байх хэрэгтэй";
+        } else if (taasanToo === randomToo) {
+          hintUguh.textContent = `Баяр хүргэе! Та ${attempt} оролдлогоор таасан байна 🥳`;
+        } else if (taasanToo < randomToo) {
+          attempt--;
+          hintUguh.textContent = `Бага байна, ${attempt} боломж үлдлээ`;
+        } else {
+          attempt--;
+          hintUguh.textContent = `Их байна, ${attempt} боломж үлдлээ`;
+        }
+
+        if (attempt === 0) {
+          hintUguh.textContent = `Та ялагдлаа 😛`;
+        }
+
+        hintUguh.classList.add("bold-hint");
+
+        setTimeout(() => {
+          hintUguh.classList.remove("bold-hint");
+        }, 500);
+      };
+    </script>
+  </body>
+</html>
